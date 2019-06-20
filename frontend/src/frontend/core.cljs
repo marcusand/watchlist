@@ -9,7 +9,7 @@
   []
   [:div.container
    [header]
-  ;  [addmovie]
+   [addmovie]
    [movielist]])
 
 (defn ^:export main
