@@ -2,8 +2,8 @@
   (:require [reagent.core :as r]
             [frontend.components.header :refer [header]]
             [frontend.components.addmovie :refer [addmovie]]
-            [frontend.components.movielist :refer [movielist]]
-            [frontend.state :as state]))
+            [frontend.components.movielist :refer [movielist]]))
+
 
 (defn app
   []
