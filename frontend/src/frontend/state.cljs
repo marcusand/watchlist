@@ -15,7 +15,7 @@
         (let [data (:body response)]
           (let [dataConverted (reader/read-string (str "[" data "]"))]
             (doseq [x dataConverted]
-              (swap! movies conj {(:_id x) x})))))))
+              (swap! movies conj {:movie x})))))))
 
 (getAllMovies)
 
