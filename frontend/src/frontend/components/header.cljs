@@ -2,4 +2,5 @@
 
 (defn header
   []
-  [:header "Watchlist"])
+  [:header
+   [:h1 "Watchlist"]])
