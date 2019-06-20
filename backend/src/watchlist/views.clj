@@ -11,10 +11,10 @@
   (resp/content-type
    (resp/resource-response "index.html" {:root "public"}) "text/html"))
 
-(defn all-movies []
-  (let [movies (mc/find-maps db "movies")]
-    (map objectIdToString movies)))
-
 (defn objectIdToString [element]
   (let [objectId (element :_id)]
     (assoc element :_id (str objectId))))
+
+(defn all-movies []
+  (let [movies (mc/find-maps db "movies")]
+    (map objectIdToString movies)))
