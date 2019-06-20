@@ -1,11 +1,12 @@
 (ns frontend.state
-  (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [frontend.api :as api]
-            [reagent.core :as r]
-            [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]]
+  (:require [reagent.core :as r]
             [cljs.reader :as reader]))
 
-
 (def movies (r/atom nil))
-(api/getAllMovies movies)
+
+(defn swapMovies
+  [data]
+  (let [dataConverted (reader/read-string (str "[" data "]"))]
+    (reset! movies nil)
+    (doseq [x dataConverted]
+      (swap! movies conj {:movie x}))))
