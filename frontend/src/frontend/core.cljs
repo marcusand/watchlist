@@ -9,10 +9,8 @@
   []
   [:div.container
    [header]
-   [addmovie]
+  ;  [addmovie]
    [movielist]])
-
-(pr @state/movies)
 
 (defn ^:export main
   []

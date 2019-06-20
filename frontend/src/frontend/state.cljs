@@ -2,18 +2,22 @@
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [reagent.core :as r]
             [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]]))
+            [cljs.core.async :refer [<!]]
+            [cljs.reader :as reader]))
 
+
+(def movies (r/atom nil))
 
 (defn getAllMovies
   []
   (go (let [response (<! (http/get "http://localhost:3000/movies"
                                    {:with-credentials? false}))]
         (let [data (:body response)]
-          data))))
+          (let [dataConverted (reader/read-string (str "[" data "]"))]
+            (doseq [x dataConverted]
+              (swap! movies conj {(:_id x) x})))))))
 
-(def movies (r/atom (getAllMovies)))
-
+(getAllMovies)
 
 (def gigs (r/atom {:gig-01 {:id :gig-01
                             :title "Macaron"
