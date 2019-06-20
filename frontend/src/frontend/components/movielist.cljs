@@ -31,7 +31,7 @@
 
 (defn movielist
   []
-  [:main
+  [:div
    [:table.watchlist
     [:thead
      [:tr [:th "Titel"] [:th "Director"] [:th "Watch Link"] [:th "Notes"] [:th "My Rating"] [:th "Watched"] [:th "Edit"]]]
