@@ -1,4 +1,4 @@
-(ns frontend.components.addmovie
+(ns frontend.components.AddMovie
   (:require [reagent.core :as r]
             [frontend.api :as api]
             [clojure.string :as s]))
@@ -15,7 +15,7 @@
           {:titel @newMovieTitel, :director @newMovieDirector, :link @newMovieLink, :notes @newMovieNotes}]
       (api/postMovie newMovie))))
 
-(defn addmovie
+(defn AddMovie
   []
   [:div
    [:h2 "Add a movie:"]

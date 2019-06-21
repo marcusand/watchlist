@@ -1,4 +1,4 @@
-(ns frontend.components.movielist
+(ns frontend.components.MovieList
   (:require [frontend.state :as state]))
 
 
@@ -29,7 +29,7 @@
      [:td (renderWatched watched)]
      [:td (renderEditButton _id)]]))
 
-(defn movielist
+(defn MovieList
   []
   [:div
    [:table.watchlist

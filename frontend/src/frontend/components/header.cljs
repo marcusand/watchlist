@@ -1,6 +1,6 @@
-(ns frontend.components.header)
+(ns frontend.components.Header)
 
-(defn header
+(defn Header
   []
   [:header
    [:h1 "Watchlist"]])

@@ -1,16 +1,16 @@
 (ns frontend.core
   (:require [reagent.core :as r]
-            [frontend.components.header :refer [header]]
-            [frontend.components.addmovie :refer [addmovie]]
-            [frontend.components.movielist :refer [movielist]]))
+            [frontend.components.Header :refer [Header]]
+            [frontend.components.AddMovie :refer [AddMovie]]
+            [frontend.components.MovieList :refer [MovieList]]))
 
 
 (defn app
   []
   [:div.container
-   [header]
-   [addmovie]
-   [movielist]])
+   [Header]
+   [AddMovie]
+   [MovieList]])
 
 (defn ^:export main
   []
