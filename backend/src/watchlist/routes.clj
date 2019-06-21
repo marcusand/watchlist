@@ -9,8 +9,8 @@
   (GET "/" [] (index-page))
   (GET "/movies" [] (all-movies))
   (POST "/movie" {params :params} (addNewMovie params))
-  (PUT  "/movie" [id] "nil")
-  (POST "/search" [id] "nil")
+  (PUT "/movie" {params :params} (updateMovie params))
+  (DELETE "/movie" [_id] (deleteMovie _id))
   (route/resources "/")
   (route/not-found "Not Found"))
 
