@@ -19,7 +19,7 @@
   []
   [:div
    [:h2 "Add a movie:"]
-   [:div#add-movie-form
+   [:div.input-form
     [:input {:placeholder "movie titel" :on-change #(reset! newMovieTitel (-> % .-target .-value))}]
     [:input {:placeholder "director" :on-change #(reset! newMovieDirector (-> % .-target .-value))}]
     [:input {:placeholder "watch links" :on-change #(reset! newMovieLink (-> % .-target .-value))}]

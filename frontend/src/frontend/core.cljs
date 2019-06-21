@@ -2,7 +2,8 @@
   (:require [reagent.core :as r]
             [frontend.components.Header :refer [Header]]
             [frontend.components.AddMovie :refer [AddMovie]]
-            [frontend.components.MovieList :refer [MovieList]]))
+            [frontend.components.MovieList :refer [MovieList]]
+            [frontend.components.Modal :refer [Modal]]))
 
 
 (defn app
@@ -10,7 +11,8 @@
   [:div.container
    [Header]
    [AddMovie]
-   [MovieList]])
+   [MovieList]
+   [Modal]])
 
 (defn ^:export main
   []

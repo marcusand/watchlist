@@ -2,11 +2,15 @@
   (:require [frontend.state :as state]))
 
 
+(defn handleEditButton []
+  (let [modal (.getElementById js/document "myModal")]
+    (set! (-> modal .-style .-display) "block")))
+
 (defn renderLink [link]
   [:a {:href link, :target "_blank"} link])
 
 (defn renderEditButton [id]
-  [:button {:id id} "Edit"])
+  [:button {:id id, :on-click handleEditButton} "Edit"])
 
 (defn renderWatched [watched]
   (if watched
