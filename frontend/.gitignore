@@ -1,6 +1,6 @@
 /node_modules
 /target
-/public/js
+/resources/public/js
 .shadow-cljs
 .nrepl-port
 yarn.lock
