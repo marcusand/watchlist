@@ -30,3 +30,8 @@
    (if (nil? key)
      (:human-form db)
      (key (:human-form db)))))
+
+(re-frame/reg-sub
+ ::error-message
+ (fn [db]
+   (:error-message db)))

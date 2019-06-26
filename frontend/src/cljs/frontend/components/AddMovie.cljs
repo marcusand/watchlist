@@ -21,5 +21,4 @@
       [:input {:placeholder (:notes @human-form)
                :value (:notes @new-movie)
                :on-change #(rf/dispatch [:update-new-movie :notes (-> % .-target .-value)])}]
-      [:button {:on-click #(rf/dispatch [:post-movie])} "Add to list"]]
-     [:hr]]))
+      [:button {:on-click #(rf/dispatch [:post-movie])} "Add to list"]]]))

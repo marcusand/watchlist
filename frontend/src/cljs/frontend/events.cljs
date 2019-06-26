@@ -4,7 +4,8 @@
    [frontend.subs :as subs]
    [frontend.db :as db]
    [day8.re-frame.http-fx]
-   [ajax.core :as ajax]))
+   [ajax.core :as ajax]
+   [clojure.string :as s]))
 
 ; ON LOAD EVENT ------------------------------------------
 
@@ -14,7 +15,8 @@
    {:movies []
     :new-movie {:title "" :director "" :link "" :notes ""}
     :modal-movie {}
-    :human-form {:title "Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}}))
+    :human-form {:title "Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}
+    :error-message "Hello"}))
 
 ; HTTP REQUESTS ------------------------------------------
 
@@ -90,6 +92,11 @@
    db))
 
 ; INTERFACE EVENTS ------------------------------------------
+
+; (rf/reg-event-db
+;  :add-movie
+;  (fn [db _]
+;    (if (s/blank? (:title @(rf/subscribe [::subs/new-movie]))))))
 
 (rf/reg-event-db
  :open-modal

@@ -4,6 +4,7 @@
    [frontend.subs :as subs]
    [frontend.components.Header :refer [Header]]
    [frontend.components.AddMovie :refer [AddMovie]]
+   [frontend.components.ErrorMessage :refer [ErrorMessage]]
    [frontend.components.MovieList :refer [MovieList]]
    [frontend.components.Modal :refer [Modal]]))
 
@@ -13,5 +14,6 @@
      [:pre (pr-str @data)]
      [Header]
      [AddMovie]
+     [ErrorMessage]
      [MovieList]
      [Modal]]))
