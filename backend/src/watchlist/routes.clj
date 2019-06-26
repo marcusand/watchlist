@@ -16,7 +16,7 @@
 
 (def handler
   (wrap-cors server-routes
-             :access-control-allow-origin [#"http://localhost:3001"]
+             :access-control-allow-origin [#"http://0.0.0.0:3449"]
              :access-control-allow-methods [:get :put :post :delete]))
 
 (def app
