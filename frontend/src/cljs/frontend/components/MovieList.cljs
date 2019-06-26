@@ -31,9 +31,15 @@
      [:td (renderEditButton movie)]]))
 
 (defn MovieList []
-  (let [movies (rf/subscribe [::subs/movies])]
+  (let [movies (rf/subscribe [::subs/movies]) human-form (rf/subscribe [::subs/human-form])]
     [:div
      [:table.watchlist
       [:thead
-       [:tr [:th "title"] [:th "Director"] [:th "Watch Link"] [:th "Notes"] [:th "My Rating"] [:th "Watched"] [:th "Edit"]]]
+       [:tr [:th (:title @human-form)]
+        [:th (:director @human-form)]
+        [:th (:link @human-form)]
+        [:th (:notes @human-form)]
+        [:th (:rating @human-form)]
+        [:th (:watched @human-form)]
+        [:th "Edit"]]]
       [:tbody (map renderRow @movies)]]]))
