@@ -48,7 +48,19 @@
                  :timeout         5000
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
-                 :on-success      [::success-delete-movie]
+                 :on-success      [::success-delete-update-movie]
+                 :on-failure      [::failure-post-movie]}}))
+
+(rf/reg-event-fx
+ :update-movie
+ (fn [_ _]
+   {:http-xhrio {:method          :put
+                 :uri             "http://localhost:3000/movie"
+                 :params          @(rf/subscribe [::subs/modal-movie])
+                 :timeout         5000
+                 :format          (ajax/url-request-format)
+                 :response-format (ajax/json-response-format {:keywords? true})
+                 :on-success      [::success-delete-update-movie]
                  :on-failure      [::failure-post-movie]}}))
 
 (rf/reg-event-db
@@ -74,7 +86,7 @@
    (prn "failure post movie")))
 
 (rf/reg-event-db
- ::success-delete-movie
+ ::success-delete-update-movie
  (fn [db [_ result]]
    (rf/dispatch [:close-modal])
    (-> db

@@ -38,4 +38,4 @@
         (renderRow :rating movie)
         (renderWatched :watched movie)]]
       [:button {:on-click  #(rf/dispatch [:delete-movie])} "Delete"]
-      [:button "Save"]]]))
+      [:button {:on-click  #(rf/dispatch [:update-movie])} "Save"]]]))
