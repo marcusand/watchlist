@@ -12,8 +12,9 @@
  :initialize
  (fn [_ _]
    {:movies []
-    :new-movie {:titel "" :director "" :link "" :notes ""}
-    :modal-movie-id ""}))
+    :new-movie {:title "" :director "" :link "" :notes ""}
+    :modal-movie {}
+    :human-form {:title "Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}}))
 
 ; HTTP REQUESTS ------------------------------------------
 
@@ -65,7 +66,7 @@
  (fn [db [_ result]]
    (-> db
        (assoc :movies result)
-       (assoc :new-movie {:titel "" :director "" :link "" :notes ""}))))
+       (assoc :new-movie {:title "" :director "" :link "" :notes ""}))))
 
 (rf/reg-event-db
  ::failure-post-movie
@@ -78,7 +79,7 @@
    (rf/dispatch [:close-modal])
    (-> db
        (assoc :movies result)
-       (assoc :modal-movie-id ""))))
+       (assoc :modal-movie {}))))
 
 ; INTERFACE EVENTS ------------------------------------------
 
@@ -91,19 +92,24 @@
 
 (rf/reg-event-db
  :open-modal
- (fn [db [_ id]]
+ (fn [db [_ movie]]
    (let [modal (.getElementById js/document "myModal")]
      (set! (-> modal .-style .-display) "block")
-     (assoc db :modal-movie-id id))))
+     (assoc db :modal-movie movie))))
 
 (rf/reg-event-db
  :close-modal
  (fn [db [_ _]]
    (let [modal (.getElementById js/document "myModal")]
      (set! (-> modal .-style .-display) "none")
-     (assoc db :modal-movie-id ""))))
+     (assoc db :modal-movie {}))))
 
 (rf/reg-event-db
  :update-new-movie
  (fn [db [_ key value]]
    (assoc-in db [:new-movie key] value)))
+
+(rf/reg-event-db
+ :update-modal-movie
+ (fn [db [_ key value]]
+   (assoc-in db [:modal-movie key] value)))

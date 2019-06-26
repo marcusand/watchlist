@@ -8,7 +8,7 @@
    [frontend.components.Modal :refer [Modal]]))
 
 (defn app []
-  (let [data (rf/subscribe [::subs/modal-movie-id])]
+  (let [data (rf/subscribe [::subs/modal-movie])]
     [:div.container
      [:pre (pr-str @data)]
      [Header]

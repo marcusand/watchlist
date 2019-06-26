@@ -15,6 +15,18 @@
      (key (:new-movie db)))))
 
 (re-frame/reg-sub
+ ::modal-movie
+ (fn [db]
+   (:modal-movie db)))
+
+(re-frame/reg-sub
  ::modal-movie-id
  (fn [db]
-   (:modal-movie-id db)))
+   (:_id (:modal-movie db))))
+
+(re-frame/reg-sub
+ ::human-form
+ (fn [db [_ key]]
+   (if (nil? key)
+     (:human-form db)
+     (key (:human-form db)))))

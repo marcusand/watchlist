@@ -9,9 +9,9 @@
   [:div
    [:h2 "Add a movie:"]
    [:div.input-form
-    [:input {:placeholder "movie titel"
-             :value @(rf/subscribe [::subs/new-movie :titel])
-             :on-change #(rf/dispatch [:update-new-movie :titel (-> % .-target .-value)])}]
+    [:input {:placeholder "movie title"
+             :value @(rf/subscribe [::subs/new-movie :title])
+             :on-change #(rf/dispatch [:update-new-movie :title (-> % .-target .-value)])}]
     [:input {:placeholder "director"
              :value @(rf/subscribe [::subs/new-movie :director])
              :on-change #(rf/dispatch [:update-new-movie :director (-> % .-target .-value)])}]
