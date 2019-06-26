@@ -30,7 +30,7 @@
 
 (defn updateMovie [data]
   "Updates a movie by given id"
-  (mc/update-by-id db movieColl (ObjectId. (data :_id)) (dissoc data :_id))
+  (mc/update-by-id db movieColl (ObjectId. (data :_id)) (assoc (dissoc data :_id) :watched (Boolean/valueOf (:watched data))))
   (all-movies))
 
 (defn deleteMovie [_id]
