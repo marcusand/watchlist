@@ -31,7 +31,7 @@
                  :uri             "http://localhost:3000/movie"
                  :params          (:new-movie db)
                  :timeout         5000
-                 :format          (ajax/text-request-format)
+                 :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::success-post-movie]
                  :on-failure      [::failure-post-movie]}}))
@@ -49,8 +49,7 @@
 (rf/reg-event-db
  ::success-post-movie
  (fn [db [_ result]]
-   (prn "succees post movie")
-   db))
+   (assoc db :movies result)))
 
 (rf/reg-event-db
  ::failure-post-movie
