@@ -8,9 +8,9 @@
    [frontend.components.Modal :refer [Modal]]))
 
 (defn app []
-  (let [new-movie (rf/subscribe [::subs/new-movie])]
+  (let [data (rf/subscribe [::subs/modal-movie-id])]
     [:div.container
-     [:pre (pr-str @new-movie)]
+     [:pre (pr-str @data)]
      [Header]
      [AddMovie]
      [MovieList]

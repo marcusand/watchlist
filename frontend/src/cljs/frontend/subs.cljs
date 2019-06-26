@@ -13,3 +13,8 @@
    (if (nil? key)
      (:new-movie db)
      (key (:new-movie db)))))
+
+(re-frame/reg-sub
+ ::modal-movie-id
+ (fn [db]
+   (:modal-movie-id db)))

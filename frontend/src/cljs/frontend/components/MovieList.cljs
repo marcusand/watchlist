@@ -7,7 +7,7 @@
   [:a {:href link, :target "_blank"} link])
 
 (defn renderEditButton [id]
-  [:button {:id id, :on-click #(rf/dispatch [:open-modal])} "Edit"])
+  [:button {:on-click #(rf/dispatch [:open-modal id])} "Edit"])
 
 (defn renderWatched [watched]
   (if watched

@@ -3,12 +3,6 @@
             [re-frame.core :as rf]
             [clojure.string :as s]))
 
-
-(defn handleDeleteMovie [])
-
-(defn handleUpdateMovie [])
-
-
 (defn Modal
   []
   [:div#myModal.modal
@@ -22,5 +16,5 @@
      [:input {:placeholder "notes"}]
      [:input {:placeholder "rating"}]
      [:input {:placeholder "watched"}]]
-    [:button {:on-click handleDeleteMovie} "Delete"]
-    [:button {:on-click handleUpdateMovie} "Save"]]])
+    [:button {:on-click  #(rf/dispatch [:delete-movie])} "Delete"]
+    [:button  "Save"]]])
