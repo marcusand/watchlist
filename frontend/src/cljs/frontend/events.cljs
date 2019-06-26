@@ -25,7 +25,7 @@
                  :uri             "http://localhost:3000/movies"
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::success-get-movies]
-                 :on-failure      [::failure-get-movies]}}))
+                 :on-failure      [::http-failure "getting the movies"]}}))
 
 (rf/reg-event-fx
  :post-movie
@@ -37,7 +37,7 @@
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::success-post-movie]
-                 :on-failure      [::failure-post-movie]}}))
+                 :on-failure      [::http-failure "creating a movie"]}}))
 
 (rf/reg-event-fx
  :delete-movie
@@ -49,7 +49,7 @@
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::success-delete-update-movie]
-                 :on-failure      [::failure-post-movie]}}))
+                 :on-failure      [::http-failure "deleting a movie"]}}))
 
 (rf/reg-event-fx
  :update-movie
@@ -61,17 +61,12 @@
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::success-delete-update-movie]
-                 :on-failure      [::failure-post-movie]}}))
+                 :on-failure      [::http-failure "updating a movie"]}}))
 
 (rf/reg-event-db
  ::success-get-movies
  (fn [db [_ result]]
    (assoc db :movies result)))
-
-(rf/reg-event-db
- ::failure-get-movies
- (fn [db [_ result]]
-   (prn "failure fetching the movie data")))
 
 (rf/reg-event-db
  ::success-post-movie
@@ -81,11 +76,6 @@
        (assoc :new-movie {:title "" :director "" :link "" :notes ""}))))
 
 (rf/reg-event-db
- ::failure-post-movie
- (fn [db [_ result]]
-   (prn "failure post movie")))
-
-(rf/reg-event-db
  ::success-delete-update-movie
  (fn [db [_ result]]
    (rf/dispatch [:close-modal])
@@ -93,14 +83,13 @@
        (assoc :movies result)
        (assoc :modal-movie {}))))
 
-; INTERFACE EVENTS ------------------------------------------
-
 (rf/reg-event-db
- :add-movie
- (fn [db [_ _]]
-   (prn "hallo")
-   #(rf/dispatch [:post-movie])
+ ::http-failure
+ (fn [db [_ message result]]
+   (prn (str "There was an error while " message))
    db))
+
+; INTERFACE EVENTS ------------------------------------------
 
 (rf/reg-event-db
  :open-modal
