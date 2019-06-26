@@ -1,7 +1,8 @@
 (ns watchlist.views
   (:require [ring.util.response :as resp]
             [monger.core :as mg]
-            [monger.collection :as mc])
+            [monger.collection :as mc]
+            [clojure.data.json :as json])
   (:import org.bson.types.ObjectId))
 
 (def conn (mg/connect))
@@ -20,7 +21,7 @@
 (defn all-movies []
   "Returns all movies from the database"
   (let [movies (mc/find-maps db movieColl)]
-    (map objectIdToString movies)))
+    (json/write-str (map objectIdToString movies))))
 
 (defn addNewMovie [data]
   "Adds a new movie to the database and returns all movies"
