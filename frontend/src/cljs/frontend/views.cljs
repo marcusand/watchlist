@@ -4,7 +4,7 @@
    [frontend.subs :as subs]
    [frontend.components.Header :refer [Header]]
    [frontend.components.AddMovie :refer [AddMovie]]
-   [frontend.components.ErrorMessage :refer [ErrorMessage]]
+   [frontend.components.Messagebox :refer [Messagebox]]
    [frontend.components.MovieList :refer [MovieList]]
    [frontend.components.Modal :refer [Modal]]))
 
@@ -13,7 +13,8 @@
     [:div.container
      [:pre (pr-str @data)]
      [Header]
+     [Messagebox]
      [AddMovie]
-     [ErrorMessage]
+     [:hr]
      [MovieList]
      [Modal]]))

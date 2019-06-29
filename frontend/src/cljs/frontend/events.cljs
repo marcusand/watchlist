@@ -5,7 +5,8 @@
    [frontend.db :as db]
    [day8.re-frame.http-fx]
    [ajax.core :as ajax]
-   [clojure.string :as s]))
+   [clojure.string :as s]
+   [frontend.lib.message :as message]))
 
 ; ON LOAD EVENT ------------------------------------------
 
@@ -15,8 +16,8 @@
    {:movies []
     :new-movie {:title "" :director "" :link "" :notes ""}
     :modal-movie {}
-    :human-form {:title "Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}
-    :error-message "Hello"}))
+    :human-form {:title "Movie Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}
+    :user-message ""}))
 
 ; HTTP REQUESTS ------------------------------------------
 
@@ -50,7 +51,7 @@
                  :timeout         5000
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
-                 :on-success      [::success-delete-update-movie]
+                 :on-success      [::success-delete-movie]
                  :on-failure      [::http-failure "deleting a movie"]}}))
 
 (rf/reg-event-fx
@@ -62,7 +63,7 @@
                  :timeout         5000
                  :format          (ajax/url-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
-                 :on-success      [::success-delete-update-movie]
+                 :on-success      [::success-update-movie]
                  :on-failure      [::http-failure "updating a movie"]}}))
 
 (rf/reg-event-db
@@ -73,14 +74,25 @@
 (rf/reg-event-db
  ::success-post-movie
  (fn [db [_ result]]
+   (message/display-message "A new movie was added to the list" 3000)
    (-> db
        (assoc :movies result)
        (assoc :new-movie {:title "" :director "" :link "" :notes ""}))))
 
 (rf/reg-event-db
- ::success-delete-update-movie
+ ::success-update-movie
  (fn [db [_ result]]
    (rf/dispatch [:close-modal])
+   (message/display-message "Movie was updateded" 3000)
+   (-> db
+       (assoc :movies result)
+       (assoc :modal-movie {}))))
+
+(rf/reg-event-db
+ ::success-delete-movie
+ (fn [db [_ result]]
+   (rf/dispatch [:close-modal])
+   (message/display-message "Movie was deleted" 3000)
    (-> db
        (assoc :movies result)
        (assoc :modal-movie {}))))
@@ -93,10 +105,12 @@
 
 ; INTERFACE EVENTS ------------------------------------------
 
-; (rf/reg-event-db
-;  :add-movie
-;  (fn [db _]
-;    (if (s/blank? (:title @(rf/subscribe [::subs/new-movie]))))))
+(rf/reg-event-fx
+ :add-movie
+ (fn [db _]
+   (if (s/blank? (:title @(rf/subscribe [::subs/new-movie])))
+     (message/display-message "Please provide at least a title" 3000)
+     (rf/dispatch [:post-movie]))))
 
 (rf/reg-event-db
  :open-modal
@@ -121,3 +135,9 @@
  :update-modal-movie
  (fn [db [_ key value]]
    (assoc-in db [:modal-movie key] value)))
+
+(rf/reg-event-db
+ :show-message
+ (fn [db [_ message]]
+   (assoc db :user-message message)))
+

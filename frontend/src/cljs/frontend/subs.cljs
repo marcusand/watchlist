@@ -32,6 +32,6 @@
      (key (:human-form db)))))
 
 (re-frame/reg-sub
- ::error-message
+ ::user-message
  (fn [db]
-   (:error-message db)))
+   (:user-message db)))

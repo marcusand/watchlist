@@ -4,7 +4,8 @@
    [re-frame.core :as re-frame]
    [frontend.events :as events]
    [frontend.views :as views]
-   [frontend.config :as config]))
+   [frontend.config :as config]
+   [frontend.lib.message :as message]))
 
 
 (defn dev-setup []
@@ -20,5 +21,6 @@
 (defn ^:export init []
   (re-frame/dispatch-sync [:initialize])
   (re-frame/dispatch [:get-movies])
+  (message/display-message "Welcome to Watchlist" 3000)
   (dev-setup)
   (mount-root))
