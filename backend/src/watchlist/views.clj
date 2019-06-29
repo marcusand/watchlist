@@ -20,7 +20,7 @@
 
 (defn all-movies []
   "Returns all movies from the database"
-  (let [movies (mc/find-maps db movieColl)]
+  (let [movies (reverse (mc/find-maps db movieColl))]
     (json/write-str (map objectIdToString movies))))
 
 (defn addNewMovie [data]
