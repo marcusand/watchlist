@@ -25,9 +25,9 @@
      [:td title]
      [:td director]
      [:td (renderLink link)]
-     [:td notes]
-     [:td (renderRating rating watched)]
-     [:td (renderWatched watched)]
+     [:td.notes notes]
+     [:td.center-text (renderRating rating watched)]
+     [:td.center-text (renderWatched watched)]
      [:td (renderEditButton movie)]]))
 
 (defn MovieList []
