@@ -17,7 +17,8 @@
     :new-movie {:title "" :director "" :link "" :notes ""}
     :modal-movie {}
     :human-form {:title "Movie Title" :director "Director" :link "Watch Link" :notes "Notes" :watched "Watched" :rating "My Rating"}
-    :user-message ""}))
+    :user-message ""
+    :current-sorting {:key :title :order "asc"}}))
 
 ; HTTP REQUESTS ------------------------------------------
 
@@ -69,33 +70,31 @@
 (rf/reg-event-db
  ::success-get-movies
  (fn [db [_ result]]
+   (rf/dispatch [:sort-movies-by (:key (:current-sorting db)) (:order (:current-sorting db))])
    (assoc db :movies result)))
 
 (rf/reg-event-db
  ::success-post-movie
  (fn [db [_ result]]
    (message/display-message "A new movie was added to the list" 3000)
-   (-> db
-       (assoc :movies result)
-       (assoc :new-movie {:title "" :director "" :link "" :notes ""}))))
+   (rf/dispatch [::success-get-movies result])
+   (assoc db :new-movie {:title "" :director "" :link "" :notes ""})))
 
 (rf/reg-event-db
  ::success-update-movie
  (fn [db [_ result]]
    (rf/dispatch [:close-modal])
    (message/display-message "Movie was updateded" 3000)
-   (-> db
-       (assoc :movies result)
-       (assoc :modal-movie {}))))
+   (rf/dispatch [::success-get-movies result])
+   (assoc db :modal-movie {})))
 
 (rf/reg-event-db
  ::success-delete-movie
  (fn [db [_ result]]
    (rf/dispatch [:close-modal])
    (message/display-message "Movie was deleted" 3000)
-   (-> db
-       (assoc :movies result)
-       (assoc :modal-movie {}))))
+   (rf/dispatch [::success-get-movies result])
+   (assoc db :modal-movie {})))
 
 (rf/reg-event-db
  ::http-failure
@@ -147,5 +146,9 @@
  :sort-movies-by
  (fn [db [_ key order]]
    (if (= order "asc")
-     (assoc db :movies (sort-by key < (db :movies)))
-     (assoc db :movies (sort-by key > (db :movies))))))
+     (-> db
+         (assoc :movies (sort-by key < (db :movies)))
+         (assoc :current-sorting {:key key :order order}))
+     (-> db
+         (assoc :movies (sort-by key > (db :movies)))
+         (assoc :current-sorting {:key key :order order})))))

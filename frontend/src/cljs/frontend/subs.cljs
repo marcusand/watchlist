@@ -35,3 +35,8 @@
  ::user-message
  (fn [db]
    (:user-message db)))
+
+(re-frame/reg-sub
+ ::current-sorting
+ (fn [db]
+   (:current-sorting db)))

@@ -9,9 +9,9 @@
    [frontend.components.Modal :refer [Modal]]))
 
 (defn app []
-  (let [data (rf/subscribe [::subs/movies])]
+  (let [data (rf/subscribe [::subs/current-sorting])]
     [:div.container
-     [:pre (pr-str @data)]
+    ;  [:pre (pr-str @data)]
      [Header]
      [Messagebox]
      [AddMovie]
