@@ -7,7 +7,7 @@
   [:a {:href link, :target "_blank"} link])
 
 (defn renderEditButton [movie]
-  [:button {:on-click #(rf/dispatch [:open-modal movie])} "Edit"])
+  [:button.btn {:on-click #(rf/dispatch [:open-modal movie])} "Edit"])
 
 (defn renderWatched [watched]
   (if watched
