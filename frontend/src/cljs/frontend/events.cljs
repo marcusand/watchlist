@@ -140,3 +140,12 @@
  :show-message
  (fn [db [_ message]]
    (assoc db :user-message message)))
+
+; SORTING ------------------------------------------
+
+(rf/reg-event-db
+ :sort-movies-by
+ (fn [db [_ key order]]
+   (if (= order "asc")
+     (assoc db :movies (sort-by key < (db :movies)))
+     (assoc db :movies (sort-by key > (db :movies))))))
