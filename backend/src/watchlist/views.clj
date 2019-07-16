@@ -25,13 +25,16 @@
 
 (defn addNewMovie [data]
   "Adds a new movie to the database and returns all movies"
-  (mc/insert db movieColl (assoc data :rating nil :watched false))
+  (mc/insert db movieColl (assoc data :rating 0 :watched false))
   (all-movies))
 
 (defn updateMovie [data]
   "Updates a movie by given id"
-  (mc/update-by-id db movieColl (ObjectId. (data :_id)) (assoc (dissoc data :_id) :watched (Boolean/valueOf (:watched data))))
-  (all-movies))
+  (let [watched (Boolean/valueOf (:watched data))]
+    (if watched
+      (mc/update-by-id db movieColl (ObjectId. (data :_id)) (assoc (dissoc data :_id) :watched watched))
+      (mc/update-by-id db movieColl (ObjectId. (data :_id)) (assoc (dissoc data :_id) :watched watched :rating 0)))
+    (all-movies)))
 
 (defn deleteMovie [_id]
   "Removes a movie by given id"

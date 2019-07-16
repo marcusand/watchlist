@@ -15,7 +15,7 @@
     [:span "no"]))
 
 (defn renderRating [rating watched]
-  (if watched
+  (if (> rating 0)
     [:span rating]
     [:span "-"]))
 
