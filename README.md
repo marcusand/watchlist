@@ -10,6 +10,6 @@ cd backend && lein ring server-headless
 ```
 - start the frontend with 
 ``` shell
-cd frontedn && lein figwheel dev
+cd frontend && lein figwheel dev
 ```
-- Visit the web application on `http://0.0.0.0:3449/`
+- Visit the application on `http://0.0.0.0:3449/`
