@@ -134,11 +134,19 @@ table.modal-table {
   margin: 15px;
 }
 
+.notes {
+  max-width: 20rem;
+}
+
 .switch {
   position: relative;
   display: inline-block;
   width: 90px;
   height: 34px;
+}
+
+.center-text {
+  text-align: center !important;
 }
 
 .switch input {
@@ -155,8 +163,8 @@ table.modal-table {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 
 .slider:before {
@@ -167,8 +175,8 @@ table.modal-table {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 
 input:checked+.slider {
