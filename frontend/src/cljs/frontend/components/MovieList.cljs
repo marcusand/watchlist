@@ -35,11 +35,20 @@
     [:div
      [:table.watchlist
       [:thead
-       [:tr [:th (:title @human-form)]
-        [:th (:director @human-form)]
+       [:tr
+        [:th (:title @human-form)
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :title "asc"])} "↑"]
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :title "desc"])} "↓"]]
+        [:th (:director @human-form)
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :director "asc"])} "↑"]
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :director "desc"])} "↓"]]
         [:th (:link @human-form)]
         [:th (:notes @human-form)]
-        [:th (:rating @human-form)]
-        [:th (:watched @human-form)]
+        [:th (:rating @human-form)
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :rating "asc"])} "↑"]
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :rating "desc"])} "↓"]]
+        [:th (:watched @human-form)
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :watched "asc"])} "↑"]
+         [:span.sorting-arrow {:on-click #(rf/dispatch [:sort-movies-by :watched "desc"])} "↓"]]
         [:th "Edit"]]]
       [:tbody (map renderRow @movies)]]]))
