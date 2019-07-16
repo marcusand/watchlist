@@ -70,13 +70,12 @@ table.watchlist {
 }
 
 .watchlist td, th {
-  border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-.watchlist tr:nth-child(even) {
-  background-color: #dddddd;
+.watchlist tr {
+  border-bottom: 1px solid #dddddd;
 }
 
 .input-form {
@@ -85,6 +84,15 @@ table.watchlist {
 
 .input-form input {
   margin-right: 1em;
+}
+
+.sorting-arrow {
+  margin-left: 0.1rem;
+}
+
+.sorting-arrow:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* The Modal (background) */
