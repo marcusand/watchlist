@@ -38,7 +38,7 @@
     {:id           "min"
      :source-paths ["src/cljs"]
      :compiler     {:main            frontend.core
-                    :output-to       "resources/public/js/compiled/app.js"
+                    :output-to       "../backend/resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}]})

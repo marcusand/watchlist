@@ -1,0 +1,315 @@
+/* = main ================================================================ */
+
+:root {
+  --primary: #000000;
+  --primary-alpha: rgba(2, 29, 73, 0.5);
+  --secondary: #ff6161;
+  --gray: #f6f6f6;
+  --gray-alpha: rgba(246, 246, 246, 0.9);
+  --black-color: #222223;
+  --red-color: #ff4d4f
+}
+
+::selection {
+  background: var(--secondary);
+}
+
+::-moz-selection {
+  background: var(--secondary);
+}
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  color: var(--primary);
+  outline: none;
+}
+
+a:active, a:hover {
+  outline-width: 0;
+}
+
+a:focus, a:hover, a:active, a.active {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+header {
+  grid-column: span 2;
+  padding: 1vw 0;
+  color: var(--secondary);
+}
+
+main {
+  padding: .4rem;
+}
+
+h1 {
+  margin-bottom: 1em;
+  font-size: 2.3em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+hr {
+  margin-bottom: 1em;
+}
+
+table.watchlist {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.watchlist thead {
+  font-weight: bold;
+}
+
+.watchlist td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+.watchlist tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.input-form {
+  margin-bottom: 1em;
+}
+
+.input-form input {
+  margin-right: 1em;
+}
+
+.sorting-arrow {
+  margin-left: 0.1rem;
+}
+
+.sorting-arrow:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+table.modal-table {
+  width: 99%;
+}
+
+.modal-content input {
+  padding: 0.3rem;
+  width: 100%;
+}
+
+.modal-table tbody tr {
+  margin: 15px;
+}
+
+.notes {
+  max-width: 20rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 34px;
+}
+
+.center-text {
+  text-align: center !important;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 41px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked+.slider {
+  background-color: var(--secondary);
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px var(--secondary);
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(41px);
+  -ms-transform: translateX(41px);
+  transform: translateX(41px);
+}
+
+/* The Close Button */
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input, .btn {
+  background: #fff;
+  color: var(--primary);
+  line-height: 1rem;
+  font-size: .9rem;
+  height: 2rem;
+}
+
+input {
+  border: .05rem solid var(--primary);
+}
+
+.btn {
+  border: .05rem solid var(--primary);
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all .2s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: .45rem .6rem;
+}
+
+.btn:focus, .btn:hover {
+  background: var(--secondary);
+  border-color: var(--primary);
+  text-decoration: none;
+}
+
+.modal-button {
+  margin: 0.5rem 0.5rem 0 0;
+  width: 6rem;
+}
+
+/* = messagebox ================================================================ */
+
+#messagebox {
+  visibility: visible;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 30px;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
