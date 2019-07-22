@@ -1,9 +1,8 @@
-/* = main ================================================================ */
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:300i,400,400i,500&display=swap');
 :root {
   --primary: #000000;
   --primary-alpha: rgba(2, 29, 73, 0.5);
-  --secondary: #ff6161;
+  --secondary: #51ff91;
   --gray: #f6f6f6;
   --gray-alpha: rgba(246, 246, 246, 0.9);
   --black-color: #222223;
@@ -19,7 +18,7 @@
 }
 
 body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -50,14 +49,16 @@ main {
 
 h1 {
   margin-bottom: 1em;
-  font-size: 2.3em;
+  font-size: 3.3em;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
+  text-decoration: underline;
 }
 
 hr {
   margin-bottom: 1em;
+  color: var(--secondary);
 }
 
 table.watchlist {
@@ -76,6 +77,10 @@ table.watchlist {
 
 .watchlist tr {
   border-bottom: 1px solid #dddddd;
+}
+
+.notes {
+  max-width: 20rem;
 }
 
 .input-form {
@@ -132,10 +137,6 @@ table.modal-table {
 
 .modal-table tbody tr {
   margin: 15px;
-}
-
-.notes {
-  max-width: 20rem;
 }
 
 .switch {
