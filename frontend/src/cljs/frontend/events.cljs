@@ -146,9 +146,5 @@
  :sort-movies-by
  (fn [db [_ key order]]
    (if (= order "asc")
-     (-> db
-         (assoc :movies (sort-by key < (db :movies)))
-         (assoc :current-sorting {:key key :order order}))
-     (-> db
-         (assoc :movies (sort-by key > (db :movies)))
-         (assoc :current-sorting {:key key :order order})))))
+     (assoc db :movies (sort-by key < (db :movies)) :current-sorting {:key key :order order})
+     (assoc db :movies (sort-by key > (db :movies)) :current-sorting {:key key :order order}))))
