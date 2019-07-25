@@ -67,11 +67,11 @@
                  :on-success      [::success-update-movie]
                  :on-failure      [::http-failure "updating a movie"]}}))
 
-(rf/reg-event-db
+(rf/reg-event-fx
  ::success-get-movies
- (fn [db [_ result]]
-   (rf/dispatch [:sort-movies-by (:key (:current-sorting db)) (:order (:current-sorting db))])
-   (assoc db :movies result)))
+ (fn [{:keys [db]} [_ result]]
+   {:dispatch [:sort-movies-by (:key (:current-sorting db)) (:order (:current-sorting db))]
+    :db (assoc db :movies result)}))
 
 (rf/reg-event-db
  ::success-post-movie
